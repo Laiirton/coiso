@@ -1,20 +1,50 @@
 {
-  "name": "coiso",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "name": "whatsapp-lottie-bot",
+  "version": "2.0.0",
+  "description": "Bot profissional para WhatsApp com Baileys v7 - Envio de stickers Lottie e comandos modulares",
+  "main": "src/bot.js",
   "type": "commonjs",
+  "scripts": {
+    "start": "node src/bot.js",
+    "dev": "NODE_ENV=development LOG_LEVEL=debug node src/bot.js",
+    "debug": "node --inspect src/bot.js",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "eslint src/**/*.js --fix",
+    "clean": "rm -rf logs/* tmp/* auth_info_baileys/* 2>/dev/null || true"
+  },
+  "keywords": [
+    "whatsapp",
+    "bot",
+    "baileys",
+    "lottie",
+    "sticker",
+    "automation",
+    "multi-device"
+  ],
+  "author": "",
+  "license": "MIT",
   "dependencies": {
     "@hapi/boom": "^10.0.1",
-    "@whiskeysockets/baileys": "^7.0.0-rc.9",
+    "baileys": "^7.0.0-rc.9",
     "dotenv": "^17.4.2",
     "pino": "^10.3.1",
     "qrcode-terminal": "^0.12.0"
-  }
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
+    "globals": "^15.0.0",
+    "pino-pretty": "^11.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Laiirton/coiso.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Laiirton/coiso/issues"
+  },
+  "homepage": "https://github.com/Laiirton/coiso#readme"
 }

@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  whatsapp-bot:
+    build: .
+    container_name: whatsapp-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+    volumes:
+      # Persistir sessão (auth)
+      - ./auth_info_baileys:/app/auth_info_baileys
+      # Persistir logs
+      - ./logs:/app/logs
+      # tmp para processamento temporário
+      - ./tmp:/app/tmp
+    ports:
+      # Expor porta se adicionar webhook/API no futuro
+      - "3000:3000"
+    networks:
+      - bot-network
+
+networks:
+  bot-network:
+    driver: bridge
