@@ -22,7 +22,7 @@ class MessageHandler {
      * Carrega automaticamente todos os comandos da pasta ./commands
      */
     loadCommands() {
-        const commandsPath = __dirname;
+        const commandsPath = path.join(__dirname, '..', 'commands');
         const commandFiles = fs.readdirSync(commandsPath)
             .filter(file => file.endsWith('.js') && file !== 'index.js');
 
