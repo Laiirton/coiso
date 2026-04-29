@@ -60,6 +60,7 @@ module.exports = {
     try {
       // ===== DOWNLOAD =====
       if (msgType === 'imageMessage') {
+        await context.react('⏳');
         context.reply('📥 Baixando imagem...');
         const buffer = await client.downloadMediaFromMessage(quoted);
         inputPath = path.join(tmp, `img_${Date.now()}.jpg`);
@@ -91,6 +92,7 @@ module.exports = {
         await context.reply('✅ Sticker criado com sucesso!');
 
       } else if (msgType === 'videoMessage') {
+        await context.react('⏳');
         context.reply('📥 Baixando vídeo...');
         const buffer = await client.downloadMediaFromMessage(quoted);
         inputPath = path.join(tmp, `vid_${Date.now()}.mp4`);
@@ -185,7 +187,7 @@ module.exports = {
       // Limpeza (atrasada para envio)
       setTimeout(() => {
         cleanedPaths.forEach(p => {
-          try { if (fs.existsSync(p)) fs.unlinkSync(p); } catch (_) {}
+          try { if (fs.existsSync(p)) fs.unlinkSync(p); } catch (_) { }
         });
       }, 8000);
     }
