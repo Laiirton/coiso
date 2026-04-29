@@ -28,7 +28,11 @@
     "baileys": "^7.0.0-rc.9",
     "dotenv": "^17.4.2",
     "pino": "^10.3.1",
-    "qrcode-terminal": "^0.12.0"
+    "qrcode-terminal": "^0.12.0",
+    "fluent-ffmpeg": "^2.1.2",
+    "sharp": "^0.33.5",
+    "gif-encoder-2": "^1.0.5",
+    "tmp-promise": "^3.0.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
