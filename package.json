@@ -1,5 +1,5 @@
 {
-  "name": "whatsapp-lottie-bot",
+  "name": "coiso",
   "version": "2.0.0",
   "description": "Bot profissional para WhatsApp com Baileys v7 - Envio de stickers Lottie e comandos modulares",
   "main": "src/bot.js",
