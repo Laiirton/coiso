@@ -29,7 +29,7 @@ const envSchema = z.object({
     .default('info'),
   TOKEN_STORE_DIR: z.string().trim().min(1).default('./tokens'),
   TOKEN_STORE: z.string().trim().min(1).default('file'),
-  MAX_VIDEO_SECONDS: z.coerce.number().int().min(1).max(30).default(8),
+  MAX_VIDEO_SECONDS: z.coerce.number().int().min(1).max(30).default(5),
   MAX_VIDEO_FPS: z.coerce.number().int().min(1).max(60).default(12),
   MAX_STICKER_SIZE: z.coerce.number().int().min(128).max(1024).default(512)
 });

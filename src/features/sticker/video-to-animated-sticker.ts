@@ -4,6 +4,8 @@ import { join } from 'node:path';
 
 import ffmpegStatic from 'ffmpeg-static';
 
+const MAX_WA_ANIMATED_STICKER_SECONDS = 5;
+
 export interface VideoToAnimatedStickerOptions {
   ffmpegPath?: string;
   maxSeconds: number;
@@ -26,6 +28,7 @@ export async function convertVideoToAnimatedSticker(
   await mkdir(outputDir, { recursive: true });
 
   const ffmpegPath = resolveFfmpegPath(options.ffmpegPath);
+  const effectiveMaxSeconds = resolveVideoStickerMaxSeconds(options.maxSeconds);
   const filters = buildFilters(options);
   const candidates = [
     {
@@ -39,7 +42,7 @@ export async function convertVideoToAnimatedSticker(
         '-i',
         inputPath,
         '-t',
-        String(options.maxSeconds),
+        String(effectiveMaxSeconds),
         '-vf',
         filters,
         '-c:v',
@@ -71,7 +74,7 @@ export async function convertVideoToAnimatedSticker(
         '-i',
         inputPath,
         '-t',
-        String(options.maxSeconds),
+        String(effectiveMaxSeconds),
         '-vf',
         filters,
         '-an',
@@ -116,11 +119,17 @@ function resolveFfmpegPath(preferredPath?: string): string {
   throw new Error('FFmpeg is not available. Install ffmpeg-static or set FFMPEG_PATH.');
 }
 
-function buildFilters(options: VideoToAnimatedStickerOptions): string {
+export function resolveVideoStickerMaxSeconds(maxSeconds: number): number {
+  return Math.max(1, Math.min(maxSeconds, MAX_WA_ANIMATED_STICKER_SECONDS));
+}
+
+export function buildFilters(options: VideoToAnimatedStickerOptions): string {
   return [
     `fps=${options.fps}`,
-    `scale=${options.size}:${options.size}:force_original_aspect_ratio=decrease`,
-    `pad=${options.size}:${options.size}:(ow-iw)/2:(oh-ih)/2:color=white`
+    `scale=${options.size}:${options.size}:force_original_aspect_ratio=decrease:flags=lanczos`,
+    'format=rgba',
+    `pad=${options.size}:${options.size}:(ow-iw)/2:(oh-ih)/2:color=0x00000000`,
+    'setsar=1'
   ].join(',');
 }
 

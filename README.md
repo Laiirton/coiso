@@ -45,7 +45,7 @@ Variaveis principais:
 - `HEADLESS`: executa o navegador em modo invisivel
 - `TOKEN_STORE_DIR`: pasta para persistir tokens da sessao
 - `TOKEN_STORE`: estrategia de persistencia do WPPConnect
-- `MAX_VIDEO_SECONDS`: limite de duracao para gerar figurinha animada
+- `MAX_VIDEO_SECONDS`: limite de duracao para gerar figurinha animada, com corte automatico no maximo de 5 segundos
 - `MAX_VIDEO_FPS`: frames por segundo usados na conversao do video
 - `MAX_STICKER_SIZE`: tamanho do quadro final da figurinha
 - `FFMPEG_PATH`: caminho customizado para o binario do ffmpeg
@@ -84,6 +84,11 @@ Responda a uma imagem ou video com:
 
 Se `AUTO_STICKER_ON_MEDIA=true`, qualquer imagem/video valido recebido sera convertido sem precisar do comando.
 
+## Comportamento de video
+
+- Videos animados sao sempre cortados automaticamente para no maximo 5 segundos
+- O frame final e centralizado com fundo transparente para evitar bordas brancas laterais
+
 ### Ajuda
 
 ```text
@@ -102,7 +107,7 @@ Se `AUTO_STICKER_ON_MEDIA=true`, qualquer imagem/video valido recebido sera conv
 
 - O cliente do WhatsApp fica isolado em `src/infrastructure/whatsapp/`
 - A logica de comandos fica em `src/features/sticker/sticker-command.ts`
-- A conversao de video para GIF fica isolada em `src/features/sticker/video-to-gif.ts`
+- A conversao de video para figurinha animada fica isolada em `src/features/sticker/video-to-animated-sticker.ts`
 - O servico de sticker nao conhece detalhes do parser, so recebe uma requisicao pronta
 - Se quiser adicionar novos comandos, crie outro arquivo em `src/features/` e ligue no `src/core/bot.ts`
 
