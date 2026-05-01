@@ -126,9 +126,9 @@ export function resolveVideoStickerMaxSeconds(maxSeconds: number): number {
 export function buildFilters(options: VideoToAnimatedStickerOptions): string {
   return [
     `fps=${options.fps}`,
-    `scale=${options.size}:${options.size}:force_original_aspect_ratio=decrease:flags=lanczos`,
+    `scale=${options.size}:${options.size}:force_original_aspect_ratio=increase:flags=lanczos`,
+    `crop=${options.size}:${options.size}:(iw-${options.size})/2:(ih-${options.size})/2`,
     'format=rgba',
-    `pad=${options.size}:${options.size}:(ow-iw)/2:(oh-ih)/2:color=0x00000000`,
     'setsar=1'
   ].join(',');
 }
@@ -136,7 +136,8 @@ export function buildFilters(options: VideoToAnimatedStickerOptions): string {
 function runProcess(command: string, args: string[]): Promise<void> {
   return new Promise((resolve, reject) => {
     const child = spawn(command, args, {
-      stdio: ['ignore', 'ignore', 'pipe']
+      stdio: ['ignore', 'ignore', 'pipe'],
+      windowsHide: true
     });
 
     let stderr = '';

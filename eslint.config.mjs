@@ -18,5 +18,16 @@ export default tseslint.config(
       'no-console': 'off',
       '@typescript-eslint/consistent-type-imports': 'error'
     }
+  },
+  {
+    files: ['**/*.cjs'],
+    languageOptions: {
+      globals: {
+        __dirname: 'readonly',
+        exports: 'readonly',
+        module: 'readonly',
+        require: 'readonly'
+      }
+    }
   }
 );

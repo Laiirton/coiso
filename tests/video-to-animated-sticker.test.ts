@@ -20,9 +20,9 @@ describe('video-to-animated-sticker helpers', () => {
     });
 
     expect(filters).toContain('fps=12');
-    expect(filters).toContain('scale=512:512:force_original_aspect_ratio=decrease:flags=lanczos');
+    expect(filters).toContain('scale=512:512:force_original_aspect_ratio=increase:flags=lanczos');
+    expect(filters).toContain('crop=512:512:(iw-512)/2:(ih-512)/2');
     expect(filters).toContain('format=rgba');
-    expect(filters).toContain('pad=512:512:(ow-iw)/2:(oh-ih)/2:color=0x00000000');
     expect(filters).toContain('setsar=1');
   });
 });

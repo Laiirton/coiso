@@ -66,19 +66,11 @@ Na primeira execucao, o bot vai mostrar o QR Code no terminal. Escaneie com:
 
 ### Modo por comando
 
-Envie uma imagem ou video com a legenda:
-
-```text
-!sticker
-```
+Envie uma imagem ou video com a legenda `!sticker` ou `!fig`.
 
 ### Modo por resposta
 
-Responda a uma imagem ou video com:
-
-```text
-!sticker
-```
+Responda a uma imagem ou video com `!sticker` ou `!fig`.
 
 ### Modo automatico
 
@@ -87,7 +79,7 @@ Se `AUTO_STICKER_ON_MEDIA=true`, qualquer imagem/video valido recebido sera conv
 ## Comportamento de video
 
 - Videos animados sao sempre cortados automaticamente para no maximo 5 segundos
-- O frame final e centralizado com fundo transparente para evitar bordas brancas laterais
+- O frame final e recortado no centro para preencher o quadrado e evitar bordas pretas ou brancas
 
 ### Ajuda
 
@@ -102,6 +94,18 @@ Se `AUTO_STICKER_ON_MEDIA=true`, qualquer imagem/video valido recebido sera conv
 - `npm start`: executa a versao compilada
 - `npm run lint`: roda o ESLint
 - `npm test`: roda os testes unitarios
+
+## PM2
+
+Para rodar em producao com PM2:
+
+```bash
+npm run build
+npx pm2 start ecosystem.config.cjs
+npx pm2 logs whatsapp-sticker-bot
+```
+
+O arquivo `[ecosystem.config.cjs](E:/git/coiso/ecosystem.config.cjs)` fixa o `cwd` na raiz do projeto, entao o `.env` e a pasta `tokens/` continuam no lugar certo.
 
 ## Observacoes de manutencao
 

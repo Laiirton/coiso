@@ -21,8 +21,8 @@ export const STICKER_HELP_MESSAGE = [
   'Bot de figurinhas',
   '',
   'Como usar:',
-  '1. Envie uma imagem ou video com a legenda `!sticker`',
-  '2. Responda a uma imagem ou video com `!sticker`',
+  '1. Envie uma imagem ou video com a legenda `!sticker` ou `!fig`',
+  '2. Responda a uma imagem ou video com `!sticker` ou `!fig`',
   '3. Ative `AUTO_STICKER_ON_MEDIA=true` no `.env` para converter automaticamente qualquer midia recebida',
   '',
   'Aliases: `!sticker`, `!fig`, `!figura`, `!s`, `!help`'
@@ -31,7 +31,7 @@ export const STICKER_HELP_MESSAGE = [
 export const STICKER_MISSING_SOURCE_MESSAGE = [
   'Nao encontrei nenhuma imagem ou video para converter.',
   '',
-  'Envie `!sticker` na legenda da midia ou responda a uma imagem/video com `!sticker`.'
+  'Envie `!sticker` ou `!fig` na legenda da midia ou responda a uma imagem/video com `!sticker` ou `!fig`.'
 ].join('\n');
 
 export type StickerRequest = {

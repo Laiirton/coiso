@@ -33,6 +33,31 @@ describe('resolveIncomingRequest', () => {
     }
   });
 
+  it('resolves a current image message when the caption contains the fig alias', async () => {
+    const message: WhatsAppMessage = {
+      id: 'msg-1b',
+      from: '5511999999999@c.us',
+      caption: '!fig',
+      isMedia: true,
+      type: 'image',
+      mimetype: 'image/jpeg'
+    };
+
+    const request = await resolveIncomingRequest(message, {
+      prefix: '!',
+      autoStickerOnMedia: false,
+      resolveQuotedMessage: async () => null
+    });
+
+    expect(request).not.toBeNull();
+    expect(request?.kind).toBe('sticker');
+
+    if (request?.kind === 'sticker') {
+      expect(request.source).toBe('current-media');
+      expect(request.sourceMessage.id).toBe('msg-1b');
+    }
+  });
+
   it('resolves a quoted video message when the user replies with the sticker command', async () => {
     const quotedMessage: WhatsAppMessage = {
       id: 'quoted-1',
